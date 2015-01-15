@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoogleTranslateAPI.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GoogleTranslateAPIDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

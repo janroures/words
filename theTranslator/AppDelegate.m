@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <AFNetworking.h>
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    NSMutableData *_downloadedData;
+}
 
 @end
 
@@ -16,8 +22,22 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    GoogleTranslateAPI *aGoogleTranslateAPI = [[GoogleTranslateAPI alloc] init];
+    [aGoogleTranslateAPI translate:@"Hello" sourceLang:@"en" destLang:@"es" delegate:self];
     return YES;
+}
+
+-(void)translate:(GoogleTranslateAPI *)aGoogleTranslateAPI didFailWithError:(NSError *)error{
+    NSLog(@"ERROR: %@", error);
+}
+
+-(void)translateProgress:(GoogleTranslateAPI *)aGoogleTranslateAPI message:(NSString *)message{
+    NSLog(@"MESSAGE: %@", message);
+}
+
+-(void)translateDidFinished:(GoogleTranslateAPI *)aGoogleTranslateAPI text:(NSString *)text{
+    NSLog(@"TEXT: %@", text);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
